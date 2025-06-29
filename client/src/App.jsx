@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import "./css/App.css"; // Assuming you have some styles in App.css
 import Nav from "./components/Navbar"; // Assuming you have a Nav component
+import AddArtist from "./components/AddArtist"; // Assuming you have an AddArtist component
 function App() {
   const [message, setMessage] = useState("");
+  const [showAddArtist, setShowAddArtist] = useState(false);
 
   useEffect(() => {
     fetch("http://localhost:5000/")
@@ -27,7 +29,8 @@ function App() {
       <Nav></Nav>
       <div className="content">
         <h1>🎧 Can't get enough of this song?</h1>
-        <h2>▶️</h2>
+        <button onClick={() => setShowAddArtist(true)}>▶️</button>
+        {showAddArtist && <AddArtist />}
         <p>{message}</p>
       </div>
     </div>
