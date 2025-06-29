@@ -51,7 +51,7 @@ body {
 
 .background {
   position: absolute;
-  top: 0;
+  top: 5rem;
   left: 0;
   width: 100%;
   background-image: url("../images/background.jpg");
@@ -115,6 +115,7 @@ body {
   top: 0;
   width: 100%;
   z-index: 1;
+  background-color: #f0eced;
 }
 
 .navbar-content {

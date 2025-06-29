@@ -2,8 +2,6 @@
 
 .recommended-section {
   padding: 3rem 2rem;
-  background: linear-gradient(135deg, #f9f9ff, #ececff);
-  min-height: 100vh;
   text-align: center;
 }
 
@@ -16,9 +14,9 @@
 
 .songs-grid {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: row;
   gap: 2rem;
-  justify-content: center;
+  justify-content: center;;
 }
 
 .song-card {

@@ -11,6 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/youtube", youtubeRoutes);
+app.use("/api/spotify", youtubeRoutes);
 
 app.get("/", (req, res) => {
   res.send("🎶 VibeList backend running");

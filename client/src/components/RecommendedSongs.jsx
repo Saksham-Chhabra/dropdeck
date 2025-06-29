@@ -28,7 +28,7 @@ function RecommendedSongs() {
 
   return (
     <section className="recommended-section">
-      <h2 className="section-title">🎧 Recommended Songs</h2>
+      <h2 className="section-title">🎧 Some of my favourites!</h2>
       <div className="songs-grid">
         {recommendedSongs.map((song) => (
           <div key={song.id} className="song-card">

@@ -1,8 +1,8 @@
 .add-favourite-artists-container {
   min-height: 100vh;
   width: 100vw;
-  background: #ffffff; /* Start with white */
-  animation: fadeToOrange 2s ease-in-out forwards; /* One-time animation */
+  background: #ffffff;
+  animation: fadeToOrange 2s ease-in-out forwards;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,10 +13,10 @@
 
 @keyframes fadeToOrange {
   0% {
-    background: #ffffff; /* Start: white */
+    background: #ffffff;
   }
   100% {
-    background: #ffe066; /* End: orange */
+    background: #ffe066;
   }
 }
 
@@ -25,13 +25,14 @@
   width: 100%;
   max-width: 70rem;
   text-align: center;
-  /* Add slide-up animation */
   transform: translateY(100px);
   opacity: 0;
   animation: slideUpFromTop 1s ease-out 0.5s forwards;
+  display: flex;
+  flex-direction: column;
+  min-height: 600px;
 }
 
-/* Keyframe for slide-up animation */
 @keyframes slideUpFromTop {
   0% {
     transform: translateY(-100px);
@@ -42,6 +43,7 @@
     opacity: 1;
   }
 }
+
 .form-wrapper h1 {
   font-size: 3.5rem;
   color: #333;
@@ -57,11 +59,21 @@
 }
 
 .artist-form {
+  flex-shrink: 0;
+  margin-bottom: 2rem;
+}
+
+.artists-list {
+  flex: 1;
+  margin-top: 2rem;
   text-align: left;
+  overflow-y: auto;
+  max-height: 300px;
 }
 
 .form-group {
   margin-bottom: 2rem;
+  position: relative; /* Allows dropdown to be absolutely positioned */
 }
 
 .form-group label {
@@ -83,13 +95,13 @@
     border-color 0.3s ease,
     box-shadow 0.3s ease;
   background: #000000;
+  color: #ffffff;
 }
 
 .form-group input:focus {
   outline: none;
   border-color: #4f46e5;
   box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
-  background: #000000;
 }
 
 .form-group input::placeholder {
@@ -107,6 +119,7 @@
   cursor: pointer;
   transition: all 0.3s ease;
   margin-top: 1rem;
+  background-color: #4f46e5;
 }
 
 .submit-btn:hover {
@@ -118,7 +131,85 @@
   transform: translateY(0);
 }
 
-/* Responsive design */
+.search-dropdown {
+  position: absolute;
+  top: calc(100% + 0.5rem); /* Appear below input */
+  left: 0;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  box-sizing: border-box;
+}
+
+.artists-grid {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  padding: 1rem;
+  min-height: 120px;
+}
+
+.artist-cancel {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.artists-grid button {
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.artists-tag {
+  background-color: #4f46e5;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  margin-right: 0.5rem;
+}
+
+.artist-details {
+  background-color: #000000;
+  color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+  gap: 1rem;
+}
+.artist-name-search {
+  font-size: 1.2rem;
+  font-weight: 600;
+  border-bottom: solid 1px #4f46e5;
+}
+
+.artist-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 1rem;
+}
+
+.artist-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image covers the container */
+  object-position: center; /* Centers the image */
+}
+
 @media (max-width: 768px) {
   .add-favourite-artists-container {
     padding: 1rem;
