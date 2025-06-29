@@ -1,0 +1,134 @@
+.add-favourite-artists-container {
+  min-height: 100vh;
+  width: 100vw;
+  background: #ffffff; /* Start with white */
+  animation: fadeToOrange 2s ease-in-out forwards; /* One-time animation */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+@keyframes fadeToOrange {
+  0% {
+    background: #ffffff; /* Start: white */
+  }
+  100% {
+    background: #ffe066; /* End: orange */
+  }
+}
+
+.form-wrapper {
+  padding: 3rem;
+  width: 100%;
+  max-width: 70rem;
+  text-align: center;
+  /* Add slide-up animation */
+  transform: translateY(100px);
+  opacity: 0;
+  animation: slideUpFromTop 1s ease-out 0.5s forwards;
+}
+
+/* Keyframe for slide-up animation */
+@keyframes slideUpFromTop {
+  0% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.form-wrapper h1 {
+  font-size: 3.5rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.subtitle {
+  color: #666;
+  font-size: 1rem;
+  margin-bottom: 2.5rem;
+  line-height: 1.5;
+}
+
+.artist-form {
+  text-align: left;
+}
+
+.form-group {
+  margin-bottom: 2rem;
+}
+
+.form-group label {
+  display: block;
+  color: #333;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid #000000;
+  border-radius: 12px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+  background: #000000;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+  background: #000000;
+}
+
+.form-group input::placeholder {
+  color: #ffffff;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 1.2rem;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(79, 70, 229, 0.3);
+}
+
+.submit-btn:active {
+  transform: translateY(0);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .add-favourite-artists-container {
+    padding: 1rem;
+  }
+
+  .form-wrapper {
+    padding: 2rem;
+  }
+
+  .form-wrapper h1 {
+    font-size: 2rem;
+  }
+}

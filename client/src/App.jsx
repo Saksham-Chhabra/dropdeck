@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react";
 import "./css/App.css"; // Assuming you have some styles in App.css
 import Nav from "./components/Navbar"; // Assuming you have a Nav component
-import AddArtist from "./components/AddArtist"; // Assuming you have an AddArtist component
+import RecommendedSongs from "./components/recommendedSongs"; // Assuming you have an AddArtist component
+import Login from "./components/login";
+import { Navigate, useNavigate } from "react-router-dom";
+
+let signedIn = true;
+
 function App() {
   const [message, setMessage] = useState("");
-  const [showAddArtist, setShowAddArtist] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch("http://localhost:5000/")
@@ -23,16 +28,23 @@ function App() {
       });
   }, []);
 
+  const handleJoinClick = () => {
+    signedIn = true;
+    navigate("/add-artist", { replace: true }); // Fixed navigation
+  };
+
   return (
     <div className="App">
-      <div className="background"></div>
       <Nav></Nav>
-      <div className="content">
-        <h1>🎧 Can't get enough of this song?</h1>
-        <button onClick={() => setShowAddArtist(true)}>▶️</button>
-        {showAddArtist && <AddArtist />}
+      <div className="background"></div>
+      <button onClick={handleJoinClick} className="join">
+        Join the Community!
+      </button>
+      {/* <div className="content">
+        <h1>My Personal Recommendations!</h1>
+        <RecommendedSongs />
         <p>{message}</p>
-      </div>
+      </div> */}
     </div>
   );
 }

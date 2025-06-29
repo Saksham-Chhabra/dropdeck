@@ -4,6 +4,7 @@ console.log("YOUTUBE_API_KEY:", API_KEY); // Debugging line to check if the API 
 const YT_API = "https://www.googleapis.com/youtube/v3/search";
 async function search(req, res) {
   const query = req.query.q;
+  console.log("Search query:", query); // Debugging line to check the search query
   try {
     const response = await axios.get(YT_API, {
       params: {
