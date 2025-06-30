@@ -1,0 +1,116 @@
+.account-container {
+  margin: 20px 20px;
+}
+
+.top-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  position: fixed;
+  top: 0;
+  left: 10px;
+}
+
+.search-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  width: 80vw;
+}
+
+.search-bar input {
+  width: 80%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  height: 4rem;
+}
+.search-bar button {
+  padding: 10px 20px;
+  margin-left: 10px;
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  height: 4rem;
+}
+
+.user-image {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  margin-top: 20px;
+  background-color: black;
+}
+
+.middle-section {
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 100px; /* Adjusted to account for fixed top section */
+}
+
+.friends {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-friend {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.friends-list div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background: black;
+}
+
+.recommended-aritsts-list div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background: black;
+}
+
+.playlists {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.music-player {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background-color: #f0eced;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
