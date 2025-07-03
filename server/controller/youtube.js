@@ -1,18 +1,34 @@
 const axios = require("axios");
-const API_KEY = process.env.YOUTUBE_API_KEY;
-console.log("YOUTUBE_API_KEY:", API_KEY); // Debugging line to check if the API key is loaded
+
+// API key is loaded
+const keys = [
+  process.env.YOUTUBE_API_KEY_1,
+  process.env.YOUTUBE_API_KEY_2,
+  process.env.YOUTUBE_API_KEY_3,
+];
+let currentIndex = 0;
+// Function to get the next API key in a round-robin fashion
+function getNextApiKey() {
+  const key = keys[currentIndex];
+  currentIndex = (currentIndex + 1) % keys.length; // Cycle through the keys
+  console.log("Using API Key:", key); // Debugging line to check which key is being used
+  return key;
+}
+
 const YT_API = "https://www.googleapis.com/youtube/v3/search";
 async function search(req, res) {
+  const API_KEY = getNextApiKey(); // Get the next API key
   const query = req.query.q;
   console.log("Search query:", query); // Debugging line to check the search query
   try {
     const response = await axios.get(YT_API, {
       params: {
         part: "snippet",
-        q: query,
+        q: query + "music",
         videoEmbeddable: "true", // 👈 important!
         type: "video",
         maxResults: 5,
+        videoCategoryId: 10,
         key: API_KEY,
       },
     });
@@ -23,6 +39,55 @@ async function search(req, res) {
   }
 }
 
+async function getRecommendations(req, res) {
+  const favouriteArtists = ["J Cole", "Vampire Weekend", "Eminem"];
+  const recentSearches = [
+    "J Cole",
+    "Vampire Weekend",
+    "Eminem",
+    "Drake",
+    "Kendrick Lamar",
+    "harry styles",
+  ];
+  const API_KEY = getNextApiKey();
+  let recommendations = [];
+  try {
+    for (const artist of favouriteArtists) {
+      const response = await axios.get(YT_API, {
+        params: {
+          part: "snippet",
+          q: artist + " music",
+          videoEmbeddable: "true",
+          type: "video",
+          maxResults: 5,
+          videoCategoryId: 10,
+          key: API_KEY,
+        },
+      });
+      recommendations.push(...response.data.items);
+    }
+    for (const search of recentSearches) {
+      const response = await axios.get(YT_API, {
+        params: {
+          part: "snippet",
+          q: search + " music",
+          videoEmbeddable: "true",
+          type: "video",
+          maxResults: 5,
+          videoCategoryId: 10,
+          key: API_KEY,
+        },
+      });
+      recommendations.push(...response.data.items);
+    }
+    res.json(recommendations);
+  } catch (err) {
+    console.error(err);
+    throw new Error("Failed to fetch recommendations");
+  }
+}
+
 module.exports = {
   search,
+  getRecommendations,
 };

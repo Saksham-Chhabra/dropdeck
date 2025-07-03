@@ -4,6 +4,7 @@ import Nav from "./components/Navbar"; // Assuming you have a Nav component
 import RecommendedSongs from "./components/recommendedSongs"; // Assuming you have an AddArtist component
 import Login from "./components/login";
 import { Navigate, useNavigate } from "react-router-dom";
+import Chat from "./components/Chat";
 
 let signedIn = true;
 
@@ -36,6 +37,7 @@ function App() {
   return (
     <div className="App">
       <Nav></Nav>
+      <Chat />
       <div className="background"></div>
       <button onClick={handleJoinClick} className="join">
         Join the Community!

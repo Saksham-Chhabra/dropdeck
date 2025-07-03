@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { search } = require("../controller/youtube");
+const { search, getRecommendations } = require("../controller/youtube");
 
 const spotifyController = require("../controller/spotify");
 
@@ -74,6 +74,8 @@ router.get("/recommendations", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
+router.get("/getRecommendations", getRecommendations);
 
 router.get("/search", search);
 

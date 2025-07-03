@@ -45,6 +45,53 @@ class SpotifyController {
     }
   }
 
+  // Search for both artists and tracks
+  async search(query, type = "artist,track", limit = 10) {
+    try {
+      const token = await this.getAccessToken();
+      const response = await axios.get("https://api.spotify.com/v1/search", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        params: {
+          q: query,
+          type: type,
+          limit: limit,
+        },
+      });
+      const results = {
+        artists: response.data.artists.items.map((artist) => ({
+          id: artist.id,
+          name: artist.name,
+          genres: artist.genres,
+          popularity: artist.popularity,
+          followers: artist.followers.total,
+          image: artist.images[0]?.url,
+          external_url: artist.external_urls.spotify,
+        })),
+        tracks: response.data.tracks.items.map((track) => ({
+          id: track.id,
+          name: track.name,
+          artist: track.artists[0].name,
+
+          album: track.album.name,
+          duration: track.duration_ms,
+          preview_url: track.preview_url,
+          image: track.album.images[0]?.url,
+          external_url: track.external_urls.spotify,
+          popularity: track.popularity,
+        })),
+      };
+      return results;
+    } catch (error) {
+      console.error(
+        "Error searching Spotify:",
+        error.response?.data || error.message
+      );
+      throw new Error("Failed to search Spotify");
+    }
+  }
+
   // Search for tracks
   async searchTracks(query, limit = 10) {
     try {
