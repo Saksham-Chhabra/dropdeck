@@ -1,4 +1,5 @@
 const axios = require("axios");
+const User = require("../models/User"); // ✅ Add this import
 
 // API key is loaded
 const keys = [
@@ -40,18 +41,13 @@ async function search(req, res) {
 }
 
 async function getRecommendations(req, res) {
-  const favouriteArtists = ["J Cole", "Vampire Weekend", "Eminem"];
-  const recentSearches = [
-    "J Cole",
-    "Vampire Weekend",
-    "Eminem",
-    "Drake",
-    "Kendrick Lamar",
-    "harry styles",
-  ];
+  const recentSearches = [];
   const API_KEY = getNextApiKey();
   let recommendations = [];
   try {
+    const { userId } = req.params; // Get userId from request parameters
+    const user = await User.findById(userId);
+    const favouriteArtists = user.favouriteArtists || [];
     for (const artist of favouriteArtists) {
       const response = await axios.get(YT_API, {
         params: {
@@ -59,7 +55,7 @@ async function getRecommendations(req, res) {
           q: artist + " music",
           videoEmbeddable: "true",
           type: "video",
-          maxResults: 5,
+          maxResults: 10,
           videoCategoryId: 10,
           key: API_KEY,
         },
@@ -73,7 +69,7 @@ async function getRecommendations(req, res) {
           q: search + " music",
           videoEmbeddable: "true",
           type: "video",
-          maxResults: 5,
+          maxResults: 10,
           videoCategoryId: 10,
           key: API_KEY,
         },
@@ -83,7 +79,6 @@ async function getRecommendations(req, res) {
     res.json(recommendations);
   } catch (err) {
     console.error(err);
-    throw new Error("Failed to fetch recommendations");
   }
 }
 

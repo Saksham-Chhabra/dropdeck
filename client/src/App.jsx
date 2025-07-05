@@ -2,11 +2,10 @@ import { useEffect, useState } from "react";
 import "./css/App.css"; // Assuming you have some styles in App.css
 import Nav from "./components/Navbar"; // Assuming you have a Nav component
 import RecommendedSongs from "./components/recommendedSongs"; // Assuming you have an AddArtist component
-import Login from "./components/login";
 import { Navigate, useNavigate } from "react-router-dom";
 import Chat from "./components/Chat";
 
-let signedIn = true;
+let signedIn = false;
 
 function App() {
   const [message, setMessage] = useState("");
@@ -31,7 +30,7 @@ function App() {
 
   const handleJoinClick = () => {
     signedIn = true;
-    navigate("/add-artist", { replace: true }); // Fixed navigation
+    navigate("/signup", { replace: true }); // Fixed navigation
   };
 
   return (

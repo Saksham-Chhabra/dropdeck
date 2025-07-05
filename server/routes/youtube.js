@@ -75,7 +75,7 @@ router.get("/recommendations", async (req, res) => {
   }
 });
 
-router.get("/getRecommendations", getRecommendations);
+router.get("/:userId/getRecommendations", getRecommendations);
 
 router.get("/search", search);
 

@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../css/AddArtists.css";
 import RecommendedSongs from "./recommendedSongs";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function AddFavouriteArtists() {
   const [artistName, setArtistName] = useState("");
@@ -8,6 +10,19 @@ export default function AddFavouriteArtists() {
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [userId, setUserId] = useState(null);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const storedUserId = localStorage.getItem("userId");
+    if (storedUserId) {
+      setUserId(storedUserId);
+      console.log("User ID from localStorage:", storedUserId);
+    } else {
+      console.warn("User ID not found in localStorage. Please log in again.");
+    }
+  }, []);
 
   const handleInputChange = (e) => {
     const value = e.target.value;
@@ -36,31 +51,14 @@ export default function AddFavouriteArtists() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const trimmedName = artistName.trim();
-    if (trimmedName === "") {
-      return; // Prevent adding empty artists
-    }
-    const existingArtist = artistsList.find(
-      (artist) => artist.name.toLowerCase() === trimmedName.toLowerCase()
-    );
-    if (existingArtist) {
-      console.warn("Artist already exists in the list:", existingArtist);
-      return; // Prevent adding duplicate artists
-    }
-    const newArtist = {
-      id: Date.now(), // Using timestamp as a unique ID
-      name: trimmedName,
-      image: null, // Placeholder for image, can be updated later
-      genres: [], // Placeholder for genres, can be updated later
-      popularity: 0, // Placeholder for popularity, can be updated later
-      isManual: true, // Flag to indicate manual addition
-    };
-    setArtistsList([...artistsList, newArtist]);
-    setArtistName(""); // Clear input field after adding
-    setSearchResults([]); // Clear search results after adding
-    setShowDropdown(false); // Hide dropdown after adding
-    console.log("Added artist:", newArtist); // Debugging line to check added artist
+    console.log("Form submission started");
+
+    axios.post(`http://localhost:5000/api/user/${userId}/artists`, {
+      artists: artistsList,
+    });
+    navigate("/home", { replace: true });
   };
+
   const addArtistFromSearch = (artist) => {
     const existingArtist = artistsList.find(
       (a) =>
@@ -118,7 +116,6 @@ export default function AddFavouriteArtists() {
                 value={artistName}
                 onChange={handleInputChange}
                 placeholder="Search for artists..."
-                required
                 autoComplete="off"
               />
 

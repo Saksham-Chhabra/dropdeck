@@ -12,6 +12,7 @@ export default function User() {
   const [debounceTimer, setDebounceTimer] = useState(null);
   const [playlists, setPlaylists] = useState([]);
   const [selectedPlaylist, setSelectedPlaylist] = useState(false);
+  const userId = localStorage.getItem("userId");
 
   function fetchVideos(searchTerm) {
     if (!searchTerm.trim() || searchTerm === lastQuery) return;
@@ -55,7 +56,7 @@ export default function User() {
 
   useEffect(() => {
     // Fetch playlists on component mount
-    fetch("http://localhost:5000/api/youtube/getRecommendations")
+    fetch(`http://localhost:5000/api/youtube/${userId}/getRecommendations`)
       .then((response) => response.json())
       .then((data) => {
         console.log("Playlists:", data);

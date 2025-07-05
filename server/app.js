@@ -5,12 +5,20 @@ const http = require("http");
 const cors = require("cors");
 const app = express();
 const youtubeRoutes = require("./routes/youtube");
+const userRoutes = require("./routes/user");
+
+const mongoose = require("mongoose");
+mongoose
+  .connect("mongodb://127.0.0.1:27017/dropdeck")
+  .then(() => console.log("MongoDB connected"))
+  .catch((err) => console.error("MongoDB connection error:", err));
 
 app.use(cors());
 app.use(express.json());
 
 app.use("/api/youtube", youtubeRoutes);
 app.use("/api/spotify", youtubeRoutes);
+app.use("/api/user", userRoutes);
 
 app.get("/", (req, res) => {
   res.send("🎶 VibeList backend running");
