@@ -7,6 +7,7 @@ import App from "./App.jsx";
 import AddFavouriteArtists from "./components/AddFavouriteArtists.jsx";
 import User from "./components/User.jsx";
 import SignUp from "./components/SignUp.jsx";
+import Chat from "./components/Chat.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -16,6 +17,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="/home" element={<User />} />
         <Route path="/add-artist" element={<AddFavouriteArtists />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/chat" element={<Chat />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>

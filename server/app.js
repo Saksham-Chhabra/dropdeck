@@ -34,7 +34,13 @@ const io = require("socket.io")(server, {
 });
 
 io.on("connection", (socket) => {
-  console.log("A user connected");
+  console.log("A user connected with id", socket.id);
+  socket.on("send_message", (data) => {
+    socket.broadcast.emit("receive_message", {
+      message: data.message,
+      id: socket.id,
+    });
+  });
 });
 
 server.listen(5000, () => {
